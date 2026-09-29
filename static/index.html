@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TechDesk Assistant – AI Tech Support</title>
+  <meta name="description" content="AI-powered technical assistant using Google Gemini. Ask any software or programming question and get expert answers backed by official documentation." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ────────── SIDEBAR ────────── -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="logo">
+      <div class="logo-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+        </svg>
+      </div>
+      <span class="logo-text">TechDesk</span>
+    </div>
+    <button class="sidebar-toggle" id="sidebarToggle" title="Toggle sidebar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+    </button>
+  </div>
+
+  <button class="new-chat-btn" id="newChatBtn">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M12 5v14M5 12h14"/>
+    </svg>
+    New Conversation
+  </button>
+
+  <div class="sidebar-section-title">Tools Available</div>
+  <div class="tool-list">
+    <div class="tool-chip"><span class="tool-dot blue"></span>Docs Search</div>
+    <div class="tool-chip"><span class="tool-dot purple"></span>Web Search</div>
+    <div class="tool-chip"><span class="tool-dot green"></span>Wikipedia</div>
+    <div class="tool-chip"><span class="tool-dot red"></span>Error Solver</div>
+    <div class="tool-chip"><span class="tool-dot orange"></span>Tech Compare</div>
+  </div>
+
+  <div class="sidebar-section-title">Quick Prompts</div>
+  <div class="quick-prompts" id="quickPrompts">
+    <button class="quick-btn" data-q="How do I use async/await in Python?">⚡ Python async/await</button>
+    <button class="quick-btn" data-q="Explain React hooks with examples">⚛️ React Hooks</button>
+    <button class="quick-btn" data-q="How to fix CORS error in Express.js?">🔧 Fix CORS error</button>
+    <button class="quick-btn" data-q="Docker vs Kubernetes: what's the difference?">🐳 Docker vs K8s</button>
+    <button class="quick-btn" data-q="Best practices for REST API design">🔗 REST API design</button>
+    <button class="quick-btn" data-q="How does Git rebase work?">🌿 Git rebase</button>
+  </div>
+
+  <div class="sidebar-footer">
+    <div class="model-badge">
+      <div class="model-dot"></div>
+      <span>Gemini 1.5 Flash</span>
+    </div>
+    <div class="version-label">LangChain · Memory Enabled</div>
+  </div>
+</aside>
+
+<!-- ────────── MAIN CHAT AREA ────────── -->
+<main class="main" id="main">
+
+  <!-- Top Nav -->
+  <header class="topbar">
+    <button class="menu-btn" id="menuBtn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+    </button>
+    <div class="topbar-center">
+      <h1 class="topbar-title">TechDesk Assistant</h1>
+      <span class="topbar-subtitle">AI-Powered Tech Support</span>
+    </div>
+    <div class="topbar-actions">
+      <button class="icon-btn" id="clearBtn" title="Clear conversation">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Messages Area -->
+  <div class="chat-area" id="chatArea">
+
+    <!-- Welcome Screen -->
+    <div class="welcome-screen" id="welcomeScreen">
+      <div class="welcome-hero">
+        <div class="hero-icon-wrap">
+          <div class="hero-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+            </svg>
+          </div>
+          <div class="hero-ring ring-1"></div>
+          <div class="hero-ring ring-2"></div>
+          <div class="hero-ring ring-3"></div>
+        </div>
+        <h2 class="welcome-title">TechDesk Assistant</h2>
+        <p class="welcome-subtitle">Your AI-powered technical expert. Ask anything about software, code, errors, or frameworks — I'll search official docs and give you precise answers.</p>
+      </div>
+
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="feature-icon blue">📚</div>
+          <h3>Official Docs</h3>
+          <p>Searches Python, MDN, React, GitHub, and Microsoft documentation</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon purple">🧠</div>
+          <h3>Memory</h3>
+          <p>Remembers your conversation context for coherent multi-turn chats</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon green">🐛</div>
+          <h3>Error Solver</h3>
+          <p>Paste any error message and get actionable fix suggestions</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon orange">⚡</div>
+          <h3>Tech Compare</h3>
+          <p>Compare frameworks, tools, and technologies side-by-side</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Messages Container -->
+    <div class="messages" id="messages"></div>
+
+  </div>
+
+  <!-- Input Area -->
+  <div class="input-area">
+    <div class="input-wrap">
+      <div class="typing-indicator" id="typingIndicator">
+        <div class="typing-dot"></div>
+        <div class="typing-dot"></div>
+        <div class="typing-dot"></div>
+        <span>TechDesk is thinking…</span>
+      </div>
+      <div class="input-box">
+        <textarea
+          id="userInput"
+          class="chat-input"
+          placeholder="Ask a technical question… (Shift+Enter for new line)"
+          rows="1"
+          maxlength="4000"
+        ></textarea>
+        <button class="send-btn" id="sendBtn" disabled>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+          </svg>
+        </button>
+      </div>
+      <div class="input-footer">
+        <span class="char-count" id="charCount">0 / 4000</span>
+        <span class="input-hint">Enter to send · Shift+Enter for new line</span>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- Tool Usage Toast -->
+<div class="toast" id="toast"></div>
+
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,322 @@
+# ==========================================
+# TechDesk AI – .gitignore
+# Security-hardened by cybersecurity review
+# ==========================================
+
+# ------------------------------------------
+# [CRITICAL] Secrets, API Keys & Credentials
+# ------------------------------------------
+
+# Environment variable files (NEVER commit these)
+.env
+.env.*
+*.env
+!.env.example           # Template is safe to commit
+
+# Scoped env files
+backend/.env
+backend/.env.*
+backend/*.env
+!backend/.env.example
+frontend/.env
+frontend/.env.*
+frontend/*.env
+!frontend/.env.example
+
+# Private key & certificate files
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+*.cer
+*.der
+*.csr
+*.jks
+*.keystore
+
+# OAuth / Service account / Cloud credentials
+credentials.json
+client_secret*.json
+service_account*.json
+token.json
+token.pickle
+*_credentials.json
+*-credentials.json
+gcloud-credentials.json
+firebase-adminsdk*.json
+.aws/
+.gcp/
+.azure/
+
+# Generic secret/config files
+*.secret
+*.secrets
+secrets.yml
+secrets.yaml
+secrets.toml
+secrets.json
+config.local.*
+local.settings.json
+appsettings.secrets.json
+
+# SSH keys
+id_rsa
+id_rsa.pub
+id_ed25519
+id_ed25519.pub
+id_dsa
+id_ecdsa
+known_hosts
+
+# Password / token files
+*.password
+*.token
+.htpasswd
+auth.json
+
+# ------------------------------------------
+# Python & Virtual Environments
+# ------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Testing & Coverage
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+
+# Type checkers
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pyre/
+.pytype/
+
+# ------------------------------------------
+# Node.js & React Frontend
+# ------------------------------------------
+node_modules/
+frontend/node_modules/
+frontend/dist/
+frontend/dist-ssr/
+frontend/.cache/
+frontend/.parcel-cache/
+*.local
+
+# Package lock alternatives (keep your chosen one)
+# package-lock.json   # uncomment if using yarn
+# yarn.lock           # uncomment if using npm
+
+# Build output
+dist/
+build/
+out/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# ------------------------------------------
+# Security Audit & Scan Artifacts
+# ------------------------------------------
+# Bandit (Python security linter)
+bandit-report.json
+bandit-report.txt
+.bandit
+
+# Semgrep
+semgrep.sarif
+.semgrep/
+
+# Snyk
+.snyk
+snyk-report.json
+
+# Trivy / dependency scan outputs
+trivy-report.json
+dependency-check-report.*
+safety-report.json
+
+# Pen-test / recon artifacts (should never be in repo)
+*.pcap
+*.cap
+recon/
+loot/
+exploit/
+
+# ------------------------------------------
+# IDE & Editor Files
+# ------------------------------------------
+.vscode/
+!.vscode/extensions.json   # Safe to share recommended extensions
+!.vscode/settings.json     # Safe if no secrets inside
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+nbproject/
+.project
+.classpath
+.settings/
+
+# ------------------------------------------
+# Operating System Files
+# ------------------------------------------
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V8
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+$RECYCLE.BIN/
+
+# ------------------------------------------
+# Docker & Container Secrets
+# ------------------------------------------
+.docker/
+docker-compose.override.yml
+docker-compose.local.yml
+# Never commit compose files with real secrets inline
+
+# ------------------------------------------
+# CI/CD & Deployment Artifacts
+# ------------------------------------------
+.github/workflows/*.local.yml
+.terraform/
+*.tfstate
+*.tfstate.*
+.terraform.lock.hcl
+.env.production
+.env.staging
+.env.test
+
+# ------------------------------------------
+# Temporary & Debug Files
+# ------------------------------------------
+*.swp
+*.swo
+*~
+*.bak
+*.tmp
+*.temp
+.cache/
+tmp/
+temp/
+
+# ------------------------------------------
+# Python & Virtual Environments
+# ------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Testing & Coverage
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+
+# ------------------------------------------
+# Node.js & React Frontend
+# ------------------------------------------
+node_modules/
+frontend/node_modules/
+frontend/dist/
+frontend/dist-ssr/
+frontend/.cache/
+*.local
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# ------------------------------------------
+# IDE & Operating System
+# ------------------------------------------
+.vscode/
+!.vscode/extensions.json
+.idea/
+*.sublime-project
+*.sublime-workspace
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*.swo
+*~
